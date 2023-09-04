@@ -1,0 +1,1 @@
+export { CellBbvaFormPredictive } from './src/CellBbvaFormPredictive.js';
