@@ -36,6 +36,7 @@ export class CellBbvaFormPredictive extends LitElement {
   // Declare properties
   static get properties() {
     return {
+      title: { type: String},
       options: { type: Object, },
       selected: { type: Boolean },
       selectOptions: { type: Boolean },
@@ -48,6 +49,7 @@ export class CellBbvaFormPredictive extends LitElement {
   // Initialize properties
   constructor() {
     super();
+    this.title = '';
     this.options = {};
     this.selected = false;
     this.selectOptions = false;
@@ -71,17 +73,17 @@ export class CellBbvaFormPredictive extends LitElement {
 
 
 
-  badgeValidation() {
-    let selectedCheckbox = this.shadowRoot.querySelectorAll("bbva-web-form-checkbox");
-    let selected = this.shadowRoot.querySelector("bbva-web-form-search");
-    selectedCheckbox.forEach(i => {
-      if (i.checked === true) {
-        selected.readonly = true;
-      } else {
-        selected.readonly = false;
-      }
-    })
-  }
+  // badgeValidation() {
+  //   let selectedCheckbox = this.shadowRoot.querySelectorAll("bbva-web-form-checkbox");
+  //   let selected = this.shadowRoot.querySelector("bbva-web-form-search");
+  //   selectedCheckbox.forEach(i => {
+  //     if (i.checked === true) {
+  //       selected.readonly = true;
+  //     } else {
+  //       selected.readonly = false;
+  //     }
+  //   })
+  // }
 
   selectedPlaca() {
     let componentPredictive = this.shadowRoot.querySelectorAll('.placa');
@@ -189,7 +191,7 @@ export class CellBbvaFormPredictive extends LitElement {
   render() {
     return html`
       <div class="container">
-            <h4>Completa los datos del vehículo</h4> 
+            <h4>${this.title}</h4> 
             <bbva-form-predictive
             class="placa"
             @click="${this.selectedPlaca}"
@@ -198,11 +200,7 @@ export class CellBbvaFormPredictive extends LitElement {
             required="" 
             .items=${this.options.placa}>
           </bbva-form-predictive>
-            <bbva-web-form-checkbox                    
-                      @click="${this.badgeValidation}"
-                      >
-                      ${this.options.items}                      
-             </bbva-web-form-checkbox>         
+                
             <bbva-form-predictive 
             class="marca"
             search="" 
