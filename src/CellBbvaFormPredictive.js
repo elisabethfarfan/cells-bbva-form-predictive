@@ -42,7 +42,14 @@ export class CellBbvaFormPredictive extends LitElement {
       selectOptions: { type: Boolean },
       values: { type: Array },
       datosSeleccionados: { type: Object },
-      required: {type: Object}
+      required: {type: Object},
+      placa: { type: String},
+      marca: { type: String},
+      anio: { type: String},
+      circulacion: { type: String},
+      glp: { type: String},
+      modelo: { type: String}
+
     };
   }
 
@@ -88,7 +95,7 @@ export class CellBbvaFormPredictive extends LitElement {
   selectedPlaca() {
     let componentPredictive = this.shadowRoot.querySelectorAll('.placa');
     if (componentPredictive[0].value !== undefined) {
-      this.datosSeleccionados.placa = componentPredictive[0].value;
+      this.placa = componentPredictive[0].value;
       this.required.placa = true;
     } else {
       this.required.placa  = false;
@@ -98,7 +105,7 @@ export class CellBbvaFormPredictive extends LitElement {
   selectedMarca() {
     let componentPredictive = this.shadowRoot.querySelectorAll('.marca');
     if (componentPredictive[0].value !== undefined) {
-      this.datosSeleccionados.marca = componentPredictive[0].value;
+      this.marca = componentPredictive[0].value;
       this.required.marca = true;
     } else {
       this.required.marca  = false;
@@ -108,7 +115,7 @@ export class CellBbvaFormPredictive extends LitElement {
   selectedModelo() {
     let componentPredictive = this.shadowRoot.querySelectorAll('.modelo');
     if (componentPredictive[0].value !== undefined) {
-      this.datosSeleccionados.modelo = componentPredictive[0].value;
+      this.modelo = componentPredictive[0].value;
       this.required.modelo = true;
     } else {
       this.required.modelo  = false;
@@ -119,7 +126,7 @@ export class CellBbvaFormPredictive extends LitElement {
     let radioButtons = this.shadowRoot.querySelectorAll(".options1");
     radioButtons.forEach(radio => {
       if (radio.checked === true) {
-        this.datosSeleccionados.glp = radio.value;
+        this.glp = radio.value;
         this.required.glp = true;
       } else {
         this.required.glp  = false;
@@ -131,7 +138,7 @@ export class CellBbvaFormPredictive extends LitElement {
     let radioButtons = this.shadowRoot.querySelectorAll(".options");
     radioButtons.forEach(radio => {
       if (radio.checked === true) {
-        this.datosSeleccionados.circulacion = radio.value;
+        this.circulacion = radio.value;
         this.required.circulacion = true;
       } else {
         this.required.circulacion  = false;
@@ -146,7 +153,7 @@ export class CellBbvaFormPredictive extends LitElement {
     formOptions.forEach(item => {
       if (item.selected === true) {
         count++;
-        this.datosSeleccionados.anio = item.value;
+        this.anio = item.value;
         this.required.anio = true;
       } else {
         this.required.anio  = false;
@@ -164,7 +171,12 @@ export class CellBbvaFormPredictive extends LitElement {
         new CustomEvent('event-datos', {
           bubbles: true,
           detail: {
-            title: this.datosSeleccionados,
+            placa: this.placa,
+            marca: this.marca,
+            anio:  this.anio,
+            circulacion: this.circulacion,
+            glp: this.glp,
+            modelo: this.modelo
           },
         })
       );
